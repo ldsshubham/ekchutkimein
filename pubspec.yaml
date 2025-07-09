@@ -1,0 +1,58 @@
+name: constructo_user
+description: "A new Flutter project."
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.1
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  cupertino_icons: ^1.0.8
+  iconsax: ^0.0.8
+  get: ^4.7.2
+  flutter_localization: ^0.3.3
+  pod: ^0.18.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+ 
+  flutter_lints: ^5.0.0
+
+
+flutter:
+
+  
+  uses-material-design: true
+
+  
+  assets:
+    - assets/images/
+    - assets/icons/
+  
+  # example:
+  fonts:
+    - family: GTEesti
+      fonts:
+        - asset: assets/fonts/gteestiprodisplay_regular.otf
+        - asset: assets/fonts/gteestiprodisplay_medium.otf
+          weight: 500
+        - asset: assets/fonts/gteestiprodisplay_regular.otf
+          weight: 600
+        - asset: assets/fonts/gteestiprodisplay_bold.otf
+          weight: 700
+        - asset: assets/fonts/gteestiprodisplay_medium.otf
+          weight: 300
+        - asset: assets/fonts/gteestiprodisplay_ultrabold.otf
+          weight: 900
+  #
+  # For details regarding fonts from package dependencies,
+  # see https://flutter.dev/to/font-from-package
