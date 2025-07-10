@@ -6,7 +6,7 @@ class SplashController extends GetxController {
   void onReady() {
     super.onReady();
     print("🚀 SplashController.onReady() running");
-    Future.delayed(Duration(seconds: 3), () {
+    Future.delayed(Duration(seconds: 1), () {
       print("Navigating to home");
       Get.offNamed(AppRoutes.onboarding);
     });

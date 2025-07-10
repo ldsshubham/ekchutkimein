@@ -106,13 +106,13 @@ class ProductCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
-              boxShadow: [
+              // boxShadow: [
                 // BoxShadow(
                 //   color: AppColors.gray,
                 //   blurRadius: 4,
                 //   offset: const Offset(0, 2),
                 // ),
-              ],
+              // ],
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

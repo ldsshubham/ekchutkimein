@@ -30,20 +30,13 @@ class CartScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(12),
                         color: AppColors.white,
-                        // boxShadow: [
-                        //   BoxShadow(
-                        //     color: AppColors.gray,
-                        //     spreadRadius: 1,
-                        //     blurRadius: 6,
-                        //     offset: Offset(0, 1), // x, y offset
-                        //   ),
-                        // ],
+                        
                       ),
                       padding: EdgeInsets.symmetric(
                         vertical: 12,
                         horizontal: 16,
                       ),
-
+                    
                       // Both left and right container starts from here
                       child: Row(
                         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -60,7 +53,7 @@ class CartScreen extends StatelessWidget {
                             ),
                           ),
                           SizedBox(width: 8),
-
+                    
                           // Right Column for title and description starts from here
                           Expanded(
                             child: Column(
@@ -107,7 +100,7 @@ class CartScreen extends StatelessWidget {
                                         ),
                                         SizedBox(
                                           height: 24,
-
+                    
                                           // width: 24,
                                           child: Text(
                                             '0',
