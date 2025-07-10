@@ -1,6 +1,7 @@
 import 'package:constructo_user/src/features/home/widgets/appcategory.dart';
 import 'package:constructo_user/src/features/product/views/featuredproduct.dart';
 import 'package:flutter/material.dart';
+
 import '../../../constants/app_colors.dart';
 
 class CategoryScreen extends StatelessWidget {
@@ -9,6 +10,15 @@ class CategoryScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        centerTitle: true,
+        title: Text(
+          "Categories",
+
+          ),
+        ),
+      
       body: SafeArea(
         child: Row(
           children: [
@@ -18,7 +28,7 @@ class CategoryScreen extends StatelessWidget {
               child: Container(
                 height: double.infinity,
                 padding: EdgeInsets.all(8),
-                child: FeaturedProductList(),  
+                child: FeaturedProductList(),
               ),
             ),
 

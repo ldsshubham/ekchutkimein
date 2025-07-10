@@ -1,5 +1,3 @@
-import 'package:constructo_user/src/constants/app_text_styles.dart';
-import 'package:constructo_user/src/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/splashcontroller.dart';
@@ -21,7 +19,6 @@ class SplashScreen extends GetView<SplashController> {
             // Text(AppString.appName, style: AppTextStyles.heading1),
             ClipRRect(
               clipBehavior: Clip.antiAlias,
-
               child: Image.asset('assets/images/mainlogo.jpg', height: 172,),
             ),
             SizedBox(height: 10),

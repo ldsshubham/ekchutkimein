@@ -107,11 +107,11 @@ class ProductCard extends StatelessWidget {
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
               boxShadow: [
-                BoxShadow(
-                  color: AppColors.gray,
-                  blurRadius: 4,
-                  offset: const Offset(0, 2),
-                ),
+                // BoxShadow(
+                //   color: AppColors.gray,
+                //   blurRadius: 4,
+                //   offset: const Offset(0, 2),
+                // ),
               ],
             ),
             child: Column(
