@@ -1,7 +1,6 @@
 // import 'package:constructo_user/src/constants/app_colors.dart';
 import 'package:constructo_user/src/constants/app_sizes.dart';
 import 'package:constructo_user/src/constants/app_text_styles.dart';
-import 'package:constructo_user/src/constants/strings.dart';
 import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
@@ -93,7 +92,7 @@ class ProfileScreen extends StatelessWidget {
                         padding: EdgeInsets.all(8),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(12),
-                          color: AppColors.success.withOpacity(.5),
+                          color: AppColors.success.withAlpha(50),
                         ),
                         child: Icon(Iconsax.user, color: AppColors.green,),
                       ),
