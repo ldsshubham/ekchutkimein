@@ -1,4 +1,5 @@
 import 'package:constructo_user/src/features/product/views/productcard.dart';
+import 'package:constructo_user/src/features/product/views/productpage.dart';
 import 'package:flutter/material.dart';
 import '../../home/widgets/appcategory.dart';
 
@@ -23,7 +24,7 @@ class FeaturedProductList extends StatelessWidget {
       itemBuilder: (context, index) {
         final product = appCategories[index];
         // print('Product: ${product.name}, Desc: ${product.appDesc}, Img: ${product.imgPath}');
-        return ProductCard(product: product);
+        return ProductCard(product: product, widget: ProductPage(product: product),);
       },
     );
   }

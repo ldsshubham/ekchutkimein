@@ -1,52 +1,52 @@
+import 'package:constructo_user/src/features/farmers/views/servicepage.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:intl/intl.dart';
 
-import '../controllers/farmercontroller.dart';
-
+import '../../home/widgets/appcategory.dart';
+import '../../product/views/productcard.dart';
 
 class FarmerScreen extends StatelessWidget {
   const FarmerScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final controller = Get.put(FarmerController());
-
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hire Or Lease"),
+        title: Text('Agricultural Services'),
       ),
-      body: Container(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          children: [
-            TextField(
-              decoration: const InputDecoration(
-                prefixIcon: Icon(Iconsax.search_normal),
-                labelText: "Search services you want to hire or lease",
-              ),
+      body: Padding(padding: EdgeInsetsGeometry.all(8),
+      child: Column(
+        children: [
+          TextField(
+            decoration: InputDecoration(
+              prefixIcon: Icon(Iconsax.search_normal)
             ),
-            const SizedBox(height: 12),
-            Obx(() {
-              final selected = controller.selectedDate.value;
-              final displayDate = selected != null
-                  ? DateFormat('EEE, MMM d').format(selected)
-                  : "Pick a date";
-
-              return Row(
-                children: [
-                  ChoiceChip(
-                    label: Text(displayDate),
-                    selected: selected != null,
-                    onSelected: (_) => controller.selectDate(context),
-                  ),
-                ],
-              );
-            }),
-          ],
-        ),
-      ),
+          ),SizedBox(
+            height: 10,
+          ),
+          Expanded(
+            child: SingleChildScrollView(
+              child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              mainAxisSpacing:8,
+              crossAxisSpacing: 8,
+              childAspectRatio: .75,
+                      ),
+                    
+                      itemCount: appCategories.length,
+                      itemBuilder: (context, index) {
+              final product = appCategories[index];
+              // print('Product: ${product.name}, Desc: ${product.appDesc}, Img: ${product.imgPath}');
+              return ProductCard(product: product, widget: Servicepage(service: product),);
+                      },
+                    ),
+            ),
+          )
+        ],
+      ),),
     );
   }
 }

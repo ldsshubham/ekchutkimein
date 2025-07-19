@@ -24,4 +24,7 @@ class FarmerController extends GetxController {
         '${selectedDate.value!.month}, '
         '${selectedDate.value!.year}';
   }
+
+
+  
 }

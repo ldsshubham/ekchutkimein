@@ -20,6 +20,8 @@ dependencies:
   flutter_localization: ^0.3.3
   pod: ^0.18.0
   intl: ^0.20.2
+  table_calendar: ^3.2.0
+  collection: ^1.19.1
 
 dev_dependencies:
   flutter_test:
