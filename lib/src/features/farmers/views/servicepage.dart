@@ -63,7 +63,6 @@ class Servicepage extends StatelessWidget {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
-                    
                     Get.to(()=>Bookingscreen());
                   },
                   child: const Text('Book Service'),
