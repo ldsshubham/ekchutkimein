@@ -62,37 +62,40 @@ class LeftContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border(
-          right: BorderSide(color: AppColors.primaryColor, width: 1.5),
+    return Expanded(
+flex: 0,
+      child: Container(
+        decoration: BoxDecoration(
+          border: Border(
+            right: BorderSide(color: AppColors.primaryColor, width: 1.5),
+          ),
         ),
-      ),
-      width: 100,
-      child: ListView.separated(
-        padding: const EdgeInsets.symmetric(vertical: 8),
-        separatorBuilder: (context, index) => const Divider(height: 4),
-        itemCount: appCategories.length,
-        itemBuilder: (context, index) {
-          final category = appCategories[index];
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
-            child: Column(
-              children: [
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: SizedBox(
-                    width: 52,
-                    height: 52,
-                    child: Image.asset(category.imgPath, fit: BoxFit.cover),
+        width: 100,
+        child: ListView.separated(
+          padding: const EdgeInsets.symmetric(vertical: 8),
+          separatorBuilder: (context, index) => const Divider(height: 4),
+          itemCount: appCategories.length,
+          itemBuilder: (context, index) {
+            final category = appCategories[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: SizedBox(
+                      width: 52,
+                      height: 52,
+                      child: Image.asset(category.imgPath, fit: BoxFit.cover),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 4),
-                Text(category.name, style: const TextStyle(fontSize: 12)),
-              ],
-            ),
-          );
-        },
+                  const SizedBox(height: 4),
+                  Text(category.name, style: const TextStyle(fontSize: 12)),
+                ],
+              ),
+            );
+          },
+        ),
       ),
     );
   }

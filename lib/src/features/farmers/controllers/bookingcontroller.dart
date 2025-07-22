@@ -7,12 +7,12 @@ class Bookingcontroller extends GetxController {
 
   final TextEditingController hoursController = TextEditingController();
   final availabilityMap = <DateTime, String>{
-    DateTime(2025, 7, 20): "2hr",
-    DateTime(2025, 7, 21): "3hr",
-    DateTime(2025, 7, 22): "1hr",
-    DateTime(2025, 7, 23): "7hr",
-    DateTime(2025, 7, 24): "9hr",
-    DateTime(2025, 7, 25): "6hr",
+    DateTime(2025, 7, 20): "2hrs",
+    DateTime(2025, 7, 21): "3hrs",
+    DateTime(2025, 7, 22): "1hrs",
+    DateTime(2025, 7, 23): "7hrs",
+    DateTime(2025, 7, 24): "9hrs",
+    DateTime(2025, 7, 25): "6hrs",
   }.obs;
 
   double get totalPrice => expectedHours.value * 1000;

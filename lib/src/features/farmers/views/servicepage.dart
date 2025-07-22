@@ -1,3 +1,4 @@
+import 'package:constructo_user/src/constants/app_sizes.dart';
 import 'package:constructo_user/src/features/farmers/views/bookingscreen.dart';
 
 import 'package:flutter/material.dart';
@@ -9,7 +10,7 @@ import '../../home/widgets/appcategory.dart';
 
 class Servicepage extends StatelessWidget {
   const Servicepage({super.key, required this.service});
-  final AppCategory service;
+  final FarmingServices service;
 
   @override
   Widget build(BuildContext context) {
@@ -34,8 +35,8 @@ class Servicepage extends StatelessWidget {
                       blurRadius: 2,
                     ),
                   ],
-                  image: const DecorationImage(
-                    image: AssetImage('assets/images/cement.png'),
+                  image: DecorationImage(
+                    image: AssetImage(service.imgPath),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -50,13 +51,13 @@ class Servicepage extends StatelessWidget {
               Text(
                 service.appDesc,
                 style:
-                    AppTextStyles.heading2.copyWith(color: AppColors.gray),
+                    AppTextStyles.bodyText.copyWith(color: AppColors.gray, fontSize: AppSizes.fontXL),
               ),
               const SizedBox(height: 10),
               Text(
-                'Rs. 1000/hr',
+                '₹${service.price.toString()}/hr',
                 style: AppTextStyles.heading2
-                    .copyWith(color: AppColors.primaryColor),
+                    .copyWith(color: AppColors.green),
               ),
               const Spacer(),
               SizedBox(

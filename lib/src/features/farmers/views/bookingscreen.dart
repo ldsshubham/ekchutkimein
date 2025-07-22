@@ -19,18 +19,17 @@ class Bookingscreen extends StatelessWidget {
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * .6,
-                child: Obx(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Obx(
                   () => TableCalendar(
                     enabledDayPredicate: (day) {
                       return !day.isBefore(DateTime.now()) &&
                           day.weekday != DateTime.sunday;
                     },
-
+                                
                     calendarBuilders: CalendarBuilders(
                       defaultBuilder: (context, day, focusedDay) {
                         final isAvailable = bookingcontroller
@@ -42,7 +41,7 @@ class Bookingscreen extends StatelessWidget {
                               (entry) => isSameDay(entry.key, day),
                             )
                             ?.value;
-
+                                
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -63,7 +62,7 @@ class Bookingscreen extends StatelessWidget {
                           ],
                         );
                       },
-
+                                
                       selectedBuilder: (context, date, _) {
                         return Container(
                           margin: EdgeInsets.all(4),
@@ -91,103 +90,103 @@ class Bookingscreen extends StatelessWidget {
                     },
                   ),
                 ),
-              ),
-
-              SizedBox(height: 10),
-              Obx(
-                () => Container(
-                  width: double.infinity,
-                  padding: EdgeInsets.all(8),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(12),
-                    border: Border.all(color: AppColors.gray, width: 2),
-                  ),
-                  child: Row(
-                    children: [
-                      Icon(Iconsax.calendar),
-                      SizedBox(width: 10),
-                      Text(
-                        bookingcontroller.selectedDate.value != null
-                            ? DateFormat(
-                                'EEE, MMM d, yyyy',
-                              ).format(bookingcontroller.selectedDate.value!)
-                            : 'No date selected',
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(height: 16),
-              TextField(
-                controller: hoursController,
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
-                decoration: InputDecoration(
-                  label: Text('Enter Your Expected Hours'),
-                  prefixIcon: Icon(Iconsax.clock),
-                ),
-                onChanged: bookingcontroller.updateHours,
-              ),
-              // SizedBox(height: 16),
-              // Text(
-              //   'After Paying Amount For Booking You Will Be Updated With Expected Working Hours For Starting Your Work:',
-              //   style: TextStyle(fontSize: AppSizes.fontL),
-              // ),
-              Spacer(),
-              SizedBox(
-                width: double.infinity,
-                child: Obx(
-                  () => ElevatedButton(
-                    onPressed: () {
-                      showDialog(
-                        context: context,
-                        barrierDismissible: false,
-                        builder: (context) => AlertDialog(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(16),
-                          ),
-                          contentPadding: const EdgeInsets.all(24),
-                          content: Column(
-                            mainAxisSize: MainAxisSize.min,
-                            children: [
-                              Icon(
-                                Icons.check_circle,
-                                size: 60,
-                                color: Colors.green,
-                              ),
-                              const SizedBox(height: 16),
-                              const Text(
-                                'Booking Confirmed!',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                'Your booking is confirmed.\nTiming will be notified to you.',
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 24),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Get.back(); // or Navigator.pop(context)
-                                  // Optionally: Navigate to another screen
-                                  // Get.to(() => HomePage());
-                                },
-                                child: const Text('Okay'),
-                              ),
-                            ],
-                          ),
+            
+                SizedBox(height: 10),
+                Obx(
+                  () => Container(
+                    width: double.infinity,
+                    padding: EdgeInsets.all(8),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(color: AppColors.gray, width: 2),
+                    ),
+                    child: Row(
+                      children: [
+                        Icon(Iconsax.calendar),
+                        SizedBox(width: 10),
+                        Text(
+                          bookingcontroller.selectedDate.value != null
+                              ? DateFormat(
+                                  'EEE, MMM d, yyyy',
+                                ).format(bookingcontroller.selectedDate.value!)
+                              : 'No date selected',
                         ),
-                      );
-                    },
-                    child: Text(
-                      'Pay & Book: ₹${bookingcontroller.totalPrice.toStringAsFixed(2)}',
+                      ],
                     ),
                   ),
                 ),
-              ),
-            ],
+                SizedBox(height: 16),
+                TextField(
+                  controller: hoursController,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(
+                    label: Text('Enter Your Expected Hours'),
+                    prefixIcon: Icon(Iconsax.clock),
+                  ),
+                  onChanged: bookingcontroller.updateHours,
+                ),
+                // SizedBox(height: 16),
+                // Text(
+                //   'After Paying Amount For Booking You Will Be Updated With Expected Working Hours For Starting Your Work:',
+                //   style: TextStyle(fontSize: AppSizes.fontL),
+                // ),
+                SizedBox(height: 30,),
+                SizedBox(
+                  width: double.infinity,
+                  child: Obx(
+                    () => ElevatedButton(
+                      onPressed: () {
+                        showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => AlertDialog(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            contentPadding: const EdgeInsets.all(24),
+                            content: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.check_circle,
+                                  size: 60,
+                                  color: Colors.green,
+                                ),
+                                const SizedBox(height: 16),
+                                const Text(
+                                  'Booking Confirmed!',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                const Text(
+                                  'Your booking is confirmed.\nTiming will be notified to you.',
+                                  textAlign: TextAlign.center,
+                                ),
+                                const SizedBox(height: 24),
+                                ElevatedButton(
+                                  onPressed: () {
+                                    Get.back(); // or Navigator.pop(context)
+                                    // Optionally: Navigate to another screen
+                                    // Get.to(() => HomePage());
+                                  },
+                                  child: const Text('Okay'),
+                                ),
+                              ],
+                            ),
+                          ),
+                        );
+                      },
+                      child: Text(
+                        'Pay & Book: ₹${bookingcontroller.totalPrice.toStringAsFixed(2)}',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),
