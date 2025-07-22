@@ -17,7 +17,7 @@ class FeaturedProductList extends StatelessWidget {
         crossAxisCount: 2,
         mainAxisSpacing:8,
         crossAxisSpacing: 8,
-        childAspectRatio: .6,
+        childAspectRatio: .75,
       ),
     
       itemCount: appCategories.length,
