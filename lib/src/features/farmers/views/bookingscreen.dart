@@ -18,7 +18,6 @@ class Bookingscreen extends StatelessWidget {
     final TextEditingController hoursController = TextEditingController();
     final paymentController = Get.put(PaymentController());
     paymentController.setContext(context);
-    paymentController.openCheckout();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Book Your Service')),
@@ -141,7 +140,11 @@ class Bookingscreen extends StatelessWidget {
                   width: double.infinity,
                   child: Obx(
                     () => ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        paymentController.openCheckout(
+                          bookingcontroller.totalPrice,
+                        );
+                      },
                       child: Text(
                         'Pay & Book: ₹${bookingcontroller.totalPrice.toStringAsFixed(2)}',
                       ),

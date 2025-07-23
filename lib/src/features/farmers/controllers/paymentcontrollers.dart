@@ -20,10 +20,10 @@ class PaymentController extends GetxController {
     razorpay.on(Razorpay.EVENT_EXTERNAL_WALLET, handleExternalWalletSelected);
   }
 
-  void openCheckout() {
+  void openCheckout(amount) {
     var options = {
       'key': 'rzp_test_1DP5mmOlF5G5ag', // ✅ Test key
-      'amount': 100, // Minimum is 100 paise = ₹1
+      'amount': amount*100, // Minimum is 100 paise = ₹1
       'name': 'Test Corp.',
       'description': 'Test Transaction',
       'retry': {'enabled': true, 'max_count': 1},
@@ -48,7 +48,8 @@ class PaymentController extends GetxController {
     _showAlertDialog("Payment Failed", 
       "Code: ${response.code}\n"
       "Description: ${response.message}\n"
-      "Metadata: ${response.error.toString()}");
+      "Metadata: ${response.error.toString()}"
+      );
   }
 
   void handlePaymentSuccessResponse(PaymentSuccessResponse response) {

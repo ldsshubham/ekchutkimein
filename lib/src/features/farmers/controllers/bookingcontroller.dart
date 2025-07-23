@@ -13,6 +13,8 @@ class Bookingcontroller extends GetxController {
     DateTime(2025, 7, 23): "7hrs",
     DateTime(2025, 7, 24): "9hrs",
     DateTime(2025, 7, 25): "6hrs",
+    DateTime(2025, 7, 26): "6hrs",
+    DateTime(2025, 7, 27): "6hrs",
   }.obs;
 
   double get totalPrice => expectedHours.value * 1000;

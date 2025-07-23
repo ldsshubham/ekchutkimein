@@ -51,7 +51,7 @@ class Servicepage extends StatelessWidget {
               Text(
                 service.appDesc,
                 style:
-                    AppTextStyles.bodyText.copyWith(color: AppColors.gray, fontSize: AppSizes.fontXL),
+                    AppTextStyles.bodyText.copyWith(color: AppColors.primaryColor, fontSize: AppSizes.fontM),
               ),
               const SizedBox(height: 10),
               Text(
