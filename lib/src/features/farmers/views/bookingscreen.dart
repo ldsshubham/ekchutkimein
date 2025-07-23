@@ -1,9 +1,11 @@
 import 'package:collection/collection.dart';
 import 'package:constructo_user/src/features/farmers/controllers/bookingcontroller.dart';
+import 'package:constructo_user/src/features/farmers/controllers/paymentcontrollers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:intl/intl.dart';
+
 import 'package:table_calendar/table_calendar.dart';
 import '../../../constants/app_colors.dart';
 
@@ -14,6 +16,10 @@ class Bookingscreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final Bookingcontroller bookingcontroller = Get.put(Bookingcontroller());
     final TextEditingController hoursController = TextEditingController();
+    final paymentController = Get.put(PaymentController());
+    paymentController.setContext(context);
+    paymentController.openCheckout();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Book Your Service')),
       body: SafeArea(
@@ -29,7 +35,7 @@ class Bookingscreen extends StatelessWidget {
                       return !day.isBefore(DateTime.now()) &&
                           day.weekday != DateTime.sunday;
                     },
-                                
+
                     calendarBuilders: CalendarBuilders(
                       defaultBuilder: (context, day, focusedDay) {
                         final isAvailable = bookingcontroller
@@ -41,7 +47,7 @@ class Bookingscreen extends StatelessWidget {
                               (entry) => isSameDay(entry.key, day),
                             )
                             ?.value;
-                                
+
                         return Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -62,7 +68,7 @@ class Bookingscreen extends StatelessWidget {
                           ],
                         );
                       },
-                                
+
                       selectedBuilder: (context, date, _) {
                         return Container(
                           margin: EdgeInsets.all(4),
@@ -90,7 +96,7 @@ class Bookingscreen extends StatelessWidget {
                     },
                   ),
                 ),
-            
+
                 SizedBox(height: 10),
                 Obx(
                   () => Container(
@@ -130,55 +136,12 @@ class Bookingscreen extends StatelessWidget {
                 //   'After Paying Amount For Booking You Will Be Updated With Expected Working Hours For Starting Your Work:',
                 //   style: TextStyle(fontSize: AppSizes.fontL),
                 // ),
-                SizedBox(height: 30,),
+                SizedBox(height: 30),
                 SizedBox(
                   width: double.infinity,
                   child: Obx(
                     () => ElevatedButton(
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          barrierDismissible: false,
-                          builder: (context) => AlertDialog(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(16),
-                            ),
-                            contentPadding: const EdgeInsets.all(24),
-                            content: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Icon(
-                                  Icons.check_circle,
-                                  size: 60,
-                                  color: Colors.green,
-                                ),
-                                const SizedBox(height: 16),
-                                const Text(
-                                  'Booking Confirmed!',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                const SizedBox(height: 8),
-                                const Text(
-                                  'Your booking is confirmed.\nTiming will be notified to you.',
-                                  textAlign: TextAlign.center,
-                                ),
-                                const SizedBox(height: 24),
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Get.back(); // or Navigator.pop(context)
-                                    // Optionally: Navigate to another screen
-                                    // Get.to(() => HomePage());
-                                  },
-                                  child: const Text('Okay'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
+                      onPressed: () {},
                       child: Text(
                         'Pay & Book: ₹${bookingcontroller.totalPrice.toStringAsFixed(2)}',
                       ),
@@ -188,6 +151,43 @@ class Bookingscreen extends StatelessWidget {
               ],
             ),
           ),
+        ),
+      ),
+    );
+  }
+
+  // Dialogue function
+  Future<dynamic> DialogBoxFunction(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+        contentPadding: const EdgeInsets.all(24),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(Icons.check_circle, size: 60, color: Colors.green),
+            const SizedBox(height: 16),
+            const Text(
+              'Booking Confirmed!',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            const Text(
+              'Your booking is confirmed.\nTiming will be notified to you.',
+              textAlign: TextAlign.center,
+            ),
+            const SizedBox(height: 24),
+            ElevatedButton(
+              onPressed: () {
+                Get.back(); // or Navigator.pop(context)
+                // Optionally: Navigate to another screen
+                // Get.to(() => HomePage());
+              },
+              child: const Text('Okay'),
+            ),
+          ],
         ),
       ),
     );

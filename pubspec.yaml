@@ -23,6 +23,7 @@ dependencies:
   table_calendar: ^3.2.0
   collection: ^1.19.1
   flutter_launcher_icons: ^0.14.4
+  razorpay_flutter: ^1.4.0
 
 dev_dependencies:
   flutter_test:
