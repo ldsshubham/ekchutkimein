@@ -1,11 +1,14 @@
-import 'package:constructo_user/src/features/home/widgets/appcategory.dart';
+import 'package:constructo_user/src/constants/app_text_styles.dart';
+
 import 'package:constructo_user/src/features/product/views/featuredproduct.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../constants/app_colors.dart';
+import '../controllers/categories_controller.dart';
 
 class CategoryScreen extends StatelessWidget {
-  const CategoryScreen({super.key});
+  CategoryScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +16,9 @@ class CategoryScreen extends StatelessWidget {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
-        title: Text(
-          "Categories",
+        title: Text("Categories"),
+      ),
 
-          ),
-        ),
-      
       body: SafeArea(
         child: Row(
           children: [
@@ -31,25 +31,6 @@ class CategoryScreen extends StatelessWidget {
                 child: FeaturedProductList(),
               ),
             ),
-
-            // Right Product Grid
-            // Expanded(
-            //   child: Padding(
-            //     padding: const EdgeInsets.all(8.0),
-            //     child: GridView.builder(
-            //       itemCount: 10, // Set your number of products
-            //       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            //         crossAxisCount: 2,
-            //         mainAxisSpacing: 8,
-            //         crossAxisSpacing: 8,
-            //         childAspectRatio: .75,
-            //       ),
-            //       itemBuilder: (context, index) {
-            //         return const FeaturedProductList();
-            //       },
-            //     ),
-            //   ),
-            // ),
           ],
         ),
       ),
@@ -58,12 +39,14 @@ class CategoryScreen extends StatelessWidget {
 }
 
 class LeftContainer extends StatelessWidget {
-  const LeftContainer({super.key});
+  final CategoriesController controller = Get.put(CategoriesController());
+  LeftContainer({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final categories = controller.categories;
     return Expanded(
-flex: 0,
+      flex: 0,
       child: Container(
         decoration: BoxDecoration(
           border: Border(
@@ -74,9 +57,9 @@ flex: 0,
         child: ListView.separated(
           padding: const EdgeInsets.symmetric(vertical: 8),
           separatorBuilder: (context, index) => const Divider(height: 4),
-          itemCount: appCategories.length,
+          itemCount: categories.length,
           itemBuilder: (context, index) {
-            final category = appCategories[index];
+            final category = categories[index];
             return Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
               child: Column(
@@ -86,11 +69,18 @@ flex: 0,
                     child: SizedBox(
                       width: 52,
                       height: 52,
-                      child: Image.asset(category.imgPath, fit: BoxFit.cover),
+                      child: Center(
+                        child: Text(
+                          style: AppTextStyles.heading1,
+                          category.cName.isNotEmpty
+                              ? category.cName[0].toUpperCase()
+                              : '?',
+                        ),
+                      ),
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(category.name, style: const TextStyle(fontSize: 12)),
+                  Text(category.cName, style: const TextStyle(fontSize: 12)),
                 ],
               ),
             );
