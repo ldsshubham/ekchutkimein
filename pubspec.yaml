@@ -1,19 +1,17 @@
 name: constructo_user
 description: "A new Flutter project."
 
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
-
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 version: 1.0.0+1
 
 environment:
   sdk: ^3.8.1
 
-
 dependencies:
   flutter:
     sdk: flutter
-  
+
   cupertino_icons: ^1.0.8
   iconsax: ^0.0.8
   get: ^4.7.2
@@ -27,32 +25,29 @@ dependencies:
   fluttertoast: ^8.2.12
   http: ^1.4.0
   shimmer: ^3.0.0
+  shared_preferences: ^2.5.3
+  isar: ^3.1.0+1
+  isar_flutter_libs: ^3.1.0+1
+  isar_generator: ^3.1.0+1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
 
-    
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: 'assets/images/mainlogo.jpg'
+  image_path: "assets/images/mainlogo.jpg"
 
-
- 
   flutter_lints: ^5.0.0
 
-
 flutter:
-
-  
   uses-material-design: true
 
-  
   assets:
     - assets/images/
     - assets/icons/
-  
+
   # example:
   fonts:
     - family: GTEesti

@@ -3,7 +3,7 @@ import 'package:constructo_user/models/categories_model.dart';
 import 'package:get/get.dart';
 
 class CategoriesController extends GetxController {
-  var categories = <Categories>[].obs;
+  var categories = <CategoryModel>[].obs;
   var isLoading = true.obs;
 
   @override

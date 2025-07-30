@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:constructo_user/src/constants/app_colors.dart';
 import 'package:constructo_user/src/constants/app_text_styles.dart';
 import 'package:constructo_user/src/features/categories/controllers/categories_controller.dart';
@@ -43,67 +45,51 @@ class CategoryList extends StatelessWidget {
           );
         }
         final categories = controller.categories;
-        return Expanded(
-          child: ListView.builder(
-            scrollDirection: scrollDirection,
-            itemCount: categories.length,
-            itemBuilder: (context, index) {
-              final category = categories[index];
-              return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8),
-                child: Column(
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(50),
-                      child: SizedBox(
-                        width: 52,
-                        height: 52,
-
-                        // child: Image.asset(category.imgPath, fit: BoxFit.cover),
-                        child: Center(
-                          child: Text(
-                            style: AppTextStyles.heading1,
-                            category.cName.isNotEmpty
-                                ? category.cName[0].toUpperCase()
-                                : '?',
+        return ListView.builder(
+          scrollDirection: scrollDirection,
+          itemCount: categories.length,
+          itemBuilder: (context, index) {
+            final category = categories[index];
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: Column(
+                children: [
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Container(
+                      width: 52,
+                      height: 52,
+                      decoration: BoxDecoration(
+                        color: Color(0xFF000000 + Random().nextInt(0xFFFFFF)),
+                      ),
+                      child: Center(
+                        child: Text(
+                          style: AppTextStyles.heading1.copyWith(
+                            color: AppColors.white,
                           ),
+                          category.cName.isNotEmpty
+                              ? category.cName[0].toUpperCase()
+                              : '?',
                         ),
                       ),
                     ),
-
-                    Text(category.cName, style: TextStyle(fontSize: 12)),
-                  ],
-                ),
-              );
-            },
-          ),
+                  ),
+                  // const SizedBox(height: 6),
+                  Text(
+                    category.cName,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 12),
+                    maxLines: 2, // Limit to 2 lines
+                    overflow:
+                        TextOverflow.ellipsis, // Add ellipsis if it overflows
+                    softWrap: true,
+                  ),
+                ],
+              ),
+            );
+          },
         );
       }),
-
-      // ListView.builder(
-      //   scrollDirection: scrollDirection,
-      //   itemCount: appCategories.length,
-      //   itemBuilder: (context, index) {
-      //     final category = controller.categories;
-      //     return Padding(
-      //       padding: const EdgeInsets.symmetric(horizontal: 8),
-      //       child: Column(
-      //         children: [
-      //           ClipRRect(
-      //             borderRadius: BorderRadius.circular(50),
-      //             child: SizedBox(
-      //               width: 52,
-      //               height: 52,
-      //               child: Image.asset(category.imgPath, fit: BoxFit.cover),
-      //             ),
-      //           ),
-
-      //           Text(category.name, style: TextStyle(fontSize: 12)),
-      //         ],
-      //       ),
-      //     );
-      //   },
-      // ),
     );
   }
 }

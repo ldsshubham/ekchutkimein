@@ -1,10 +1,14 @@
-class Categories {
+class CategoryModel {
   final int cId;
   final String cName;
   final String? cImg;
-  Categories({required this.cName, this.cImg, required this.cId});
+  CategoryModel({required this.cName, this.cImg, required this.cId});
 
-  factory Categories.fromJson(Map<String, dynamic> json) {
-    return Categories(cName: json['name'], cImg: json['img'], cId: json['id']);
+  factory CategoryModel.fromJson(Map<String, dynamic> json) {
+    return CategoryModel(
+      cName: json['name'],
+      cImg: json['img'],
+      cId: json['id'],
+    );
   }
 }
