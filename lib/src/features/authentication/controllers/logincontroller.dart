@@ -6,7 +6,6 @@ import 'package:get/get.dart';
 class LoginController extends GetxController {
   final mobileController = TextEditingController();
   final otpController = TextEditingController();
-
   var currentStep = 0.obs;
   var isMobileValid = false.obs;
 

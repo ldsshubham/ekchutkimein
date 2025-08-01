@@ -1,9 +1,7 @@
-import 'package:constructo_user/src/features/authentication/view/widgets/otpcomponent.dart';
 import 'package:constructo_user/src/routing/apppages.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/singupcontroller.dart';
-import '../view/widgets/singupcomponent.dart';
 
 class SignupScreen extends StatelessWidget {
   SignupScreen({super.key});
