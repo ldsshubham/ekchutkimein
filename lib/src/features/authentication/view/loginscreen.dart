@@ -15,42 +15,60 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: EdgeInsets.fromLTRB(16, 32, 16, 32),
+        padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Show Login or OTP screen based on step
             Obx(() {
               return controller.currentStep.value == 0
-                  ? SignupComponent()
-                  : OtpComponent();
+                  ? LoginComponent(
+                      mobileController: controller.mobileController,
+                    )
+                  : OtpComponent(otpController: controller.otpController);
             }),
 
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+
+            // Button to send OTP or verify
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
-                onPressed: controller.goToNextStep,
+                onPressed: () {
+                  if (controller.currentStep.value == 0) {
+                    controller.requestOTP();
+                  } else {
+                    // Later you can implement: controller.verifyOTP()
+                    Get.snackbar(
+                      "Info",
+                      "OTP Verification not yet implemented.",
+                      backgroundColor: Colors.orange,
+                      colorText: Colors.white,
+                    );
+                  }
+                },
                 child: Obx(() {
-                  return controller.currentStep.value == 0
-                      ? Text('Next')
-                      : Text('Verify OTP');
+                  return Text(
+                    controller.currentStep.value == 0
+                        ? 'Send OTP'
+                        : 'Verify OTP',
+                  );
                 }),
               ),
             ),
 
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text("Don't have an account?"),
-                TextButton(onPressed: () {
-                  Get.offNamed(AppRoutes.signup);
-                }, child: Text('Create Account')),
-              ],
+            const SizedBox(height: 10),
+
+            // Optional: Skip button
+            SizedBox(
+              width: double.infinity,
+              child: TextButton(
+                onPressed: () {
+                  Get.toNamed(AppRoutes.home);
+                },
+                child: const Text('Skip'),
+              ),
             ),
-            
-            SizedBox(width:double.infinity,  child: TextButton(onPressed: (){
-              Get.toNamed(AppRoutes.home);
-            }, child:Text('Skip')))
           ],
         ),
       ),

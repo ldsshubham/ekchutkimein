@@ -27,35 +27,43 @@ class MainLoginSign extends StatelessWidget {
                   ),
                 ),
               ),
-ClipRRect(
-              clipBehavior: Clip.antiAlias,
+              ClipRRect(
+                clipBehavior: Clip.antiAlias,
 
-              child: Image.asset('assets/images/mainlogo.jpg', height: 172,),
-            ),
+                child: Image.asset('assets/images/mainlogo.jpg', height: 172),
+              ),
               Container(
                 padding: EdgeInsets.fromLTRB(16, 0, 16, 32),
                 child: Column(
                   spacing: 4,
                   children: [
+                    // SizedBox(
+                    //   width: double.infinity,
+                    //   child: ElevatedButton(
+                    //     onPressed: () {
+                    //       Get.toNamed(AppRoutes.signup);
+                    //     },
+                    //     child: Text("Signup for joining"),
+                    //   ),
+                    // ),
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         onPressed: () {
-                          Get.toNamed(AppRoutes.signup);
+                          Get.toNamed(AppRoutes.login);
                         },
-                        child: Text("Signup for joining"),
+                        child: Text("Continue With Phone"),
                       ),
                     ),
                     SizedBox(
                       width: double.infinity,
                       child: OutlinedButton(
                         onPressed: () {
-                          Get.toNamed(AppRoutes.login);
+                          Get.toNamed(AppRoutes.home);
                         },
-                        child: Text("Login"),
+                        child: Text('Continue Without Phone'),
                       ),
-                    ), 
-                    SizedBox(width: double.infinity, child: TextButton(onPressed: (){}, child: Text('Skip')))
+                    ),
                   ],
                 ),
               ),

@@ -18,12 +18,11 @@ class SignupScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Obx(() {
-              return controller.currentStep.value == 0
-                  ? SignupComponent()
-                  : OtpComponent();
-            }),
-
+            // Obx(() {
+            //   return controller.currentStep.value == 0
+            //       ? SignupComponent()
+            //       : OtpComponent();
+            // }),
             SizedBox(height: 10),
             SizedBox(
               width: double.infinity,

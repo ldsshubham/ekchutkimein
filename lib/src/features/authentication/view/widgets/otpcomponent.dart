@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-
 import '../../../../constants/app_font_weight.dart';
 import '../../../../constants/app_text_styles.dart';
 
 class OtpComponent extends StatelessWidget {
-  const OtpComponent({super.key});
+  final TextEditingController otpController;
+  const OtpComponent({super.key, required this.otpController});
 
   @override
   Widget build(BuildContext context) {
@@ -19,9 +19,7 @@ class OtpComponent extends StatelessWidget {
           ),
         ),
         SizedBox(height: 12),
-        TextField(
-          decoration: InputDecoration(label: Text('Enter the OTP')),
-        ),
+        TextField(decoration: InputDecoration(label: Text('Enter the OTP'))),
       ],
     );
   }

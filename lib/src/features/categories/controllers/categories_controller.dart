@@ -1,4 +1,4 @@
-import 'package:constructo_user/config/api_services.dart';
+import 'package:constructo_user/api/categories_api.dart';
 import 'package:constructo_user/models/categories_model.dart';
 import 'package:get/get.dart';
 
@@ -15,7 +15,7 @@ class CategoriesController extends GetxController {
   void fetchCategories() async {
     try {
       isLoading.value = true;
-      final result = await ApiServices.fetchCategories();
+      final result = await CategoriesApiServices.fetchCategories();
       categories.value = result;
       print(result);
     } catch (e) {

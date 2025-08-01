@@ -3,8 +3,10 @@ import 'package:flutter/material.dart';
 import '../../../../constants/app_font_weight.dart';
 import '../../../../constants/app_text_styles.dart';
 
-class SignupComponent extends StatelessWidget {
-  const SignupComponent({super.key});
+class LoginComponent extends StatelessWidget {
+  final TextEditingController mobileController;
+
+  LoginComponent({super.key, required this.mobileController});
 
   @override
   Widget build(BuildContext context) {
@@ -13,13 +15,15 @@ class SignupComponent extends StatelessWidget {
       children: [
         SizedBox(height: MediaQuery.sizeOf(context).height * 0.1),
         Text(
-          'Login to Your\nAccount',
+          'Enter Mobile Number To Proceed',
           style: AppTextStyles.heading1.copyWith(
             fontWeight: AppFontWeight.semiBold,
           ),
         ),
         SizedBox(height: 12),
         TextField(
+          keyboardType: TextInputType.phone,
+          controller: mobileController,
           decoration: InputDecoration(label: Text('Enter Your Mobile Number')),
         ),
       ],
