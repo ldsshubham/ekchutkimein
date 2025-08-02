@@ -13,8 +13,9 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 72, // Adjust height as needed
+    return Container(
+      height: 96,
+      // padding: EdgeInsets.all(8), // Adjust height as needed
       child: Obx(() {
         if (controller.isLoading.value) {
           return ListView.builder(
@@ -50,8 +51,9 @@ class CategoryList extends StatelessWidget {
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            return Container(
+              width: 60,
+              margin: EdgeInsets.symmetric(horizontal: 8),
               child: Column(
                 children: [
                   ClipRRect(
@@ -62,27 +64,38 @@ class CategoryList extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xFF000000 + Random().nextInt(0xFFFFFF)),
                       ),
-                      child: Center(
-                        child: Text(
-                          style: AppTextStyles.heading1.copyWith(
-                            color: AppColors.white,
-                          ),
-                          category.cName.isNotEmpty
-                              ? category.cName[0].toUpperCase()
-                              : '?',
-                        ),
+                      child: Image.network(
+                        '${category.cImg}',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, StackTrace) {
+                          return Center(
+                            child: Text(
+                              style: AppTextStyles.heading1.copyWith(
+                                color: AppColors.white,
+                              ),
+                              category.cName.isNotEmpty
+                                  ? category.cName[0].toUpperCase()
+                                  : '?',
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
                   // const SizedBox(height: 6),
-                  Text(
-                    category.cName,
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 12),
-                    maxLines: 2, // Limit to 2 lines
-                    overflow:
-                        TextOverflow.ellipsis, // Add ellipsis if it overflows
-                    softWrap: true,
+                  Expanded(
+                    child: Text(
+                      category.cName,
+
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        height: 1.2, // line height
+                      ),
+                    ),
                   ),
                 ],
               ),

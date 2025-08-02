@@ -7,9 +7,7 @@ import '../widgets/categorylist.dart';
 import '../widgets/customappbar.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({
-    super.key,
-  });
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,14 +28,14 @@ class HomePage extends StatelessWidget {
                   Text('Categories', style: AppTextStyles.heading2),
                   SizedBox(height: 16),
                   // Horizontal ListView with fixed height
-                  CategoryList(scrollDirection: Axis.horizontal,),
+                  CategoryList(scrollDirection: Axis.horizontal),
                   // Featured product list
                   SizedBox(height: 16),
-    
+
                   Text('Featured Product', style: AppTextStyles.heading2),
-    
+
                   SizedBox(height: 16),
-                  FeaturedProductList(),
+                  FeaturedProductList(physics: NeverScrollableScrollPhysics()),
                 ],
               ),
             ),
@@ -47,6 +45,3 @@ class HomePage extends StatelessWidget {
     );
   }
 }
-
-
-

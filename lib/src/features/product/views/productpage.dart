@@ -1,12 +1,12 @@
+import 'package:constructo_user/models/products_models.dart';
 import 'package:constructo_user/src/constants/app_colors.dart';
 import 'package:constructo_user/src/constants/app_text_styles.dart';
-import 'package:constructo_user/src/features/home/widgets/appcategory.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductPage extends StatelessWidget {
-  final AppCategory product;
+  final ProductsModel product;
   const ProductPage({super.key, required this.product});
 
   @override
@@ -31,25 +31,41 @@ class ProductPage extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: BorderRadiusGeometry.circular(12),
-                    child: Image.asset(
-                      product.imgPath,
-                      width: double.infinity,
-                      height: 200,
-                      fit: BoxFit.cover,
-                    ),
+                    child:
+                        product.productImg != null &&
+                            product.productImg!.isNotEmpty
+                        ? Image.network(
+                            product.productImg!,
+                            width: double.infinity,
+                            height: 200,
+                            fit: BoxFit.cover,
+                            errorBuilder: (context, error, stackTrace) {
+                              return Container(
+                                color: Colors.grey.shade200,
+                                height: 200,
+                                child: Icon(Icons.image_not_supported),
+                              );
+                            },
+                          )
+                        : Container(
+                            color: Colors.grey.shade200,
+                            height: 200,
+                            width: double.infinity,
+                            child: Icon(Icons.image, size: 40),
+                          ),
                   ),
                   SizedBox(height: 16),
                   Text(
-                    product.name,
+                    product.productName,
                     style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                   ),
                   SizedBox(height: 8),
                   Text(
-                    'Price: ₹${product.price.toStringAsFixed(2)}',
+                    'Price: ₹${product.productPrice}',
                     style: TextStyle(color: Colors.green, fontSize: 20),
                   ),
                   SizedBox(height: 8),
-                  Text(product.appDesc),
+                  Text(product.productDescription),
                   SizedBox(height: 16),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -58,7 +74,7 @@ class ProductPage extends StatelessWidget {
                         children: [
                           Text('In Stock: ', style: AppTextStyles.bodyText),
                           Text(
-                            product.stock.toString(),
+                            product.categoryId.toString(),
                             style: AppTextStyles.bodyText.copyWith(
                               color: AppColors.warning,
                             ),

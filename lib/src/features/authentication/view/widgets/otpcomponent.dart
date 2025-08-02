@@ -19,7 +19,10 @@ class OtpComponent extends StatelessWidget {
           ),
         ),
         SizedBox(height: 12),
-        TextField(decoration: InputDecoration(label: Text('Enter the OTP'))),
+        TextField(
+          controller: otpController,
+          decoration: InputDecoration(label: Text('Enter the OTP')),
+        ),
       ],
     );
   }

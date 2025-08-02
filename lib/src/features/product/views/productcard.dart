@@ -1,17 +1,12 @@
-
-
+import 'package:constructo_user/models/products_models.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_colors.dart';
-import '../../home/widgets/appcategory.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({
-    super.key,
-    required this.product, required this.widget
-  });
+  const ProductCard({super.key, required this.product, required this.widget});
 
-  final AppCategory product;
+  final ProductsModel product;
   final Widget widget;
 
   @override
@@ -26,7 +21,6 @@ class ProductCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
-             
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,12 +30,28 @@ class ProductCard extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(12),
                   ),
-                  child: Image.asset(
-                    product.imgPath,
-                    width: double.infinity,
-                    height: constraints.maxWidth * 0.6, // Responsive height
-                    fit: BoxFit.cover,
-                  ),
+                  child:
+                      product.productImg != null &&
+                          product.productImg!.isNotEmpty
+                      ? Image.network(
+                          product.productImg!,
+                          width: double.infinity,
+                          height: constraints.maxWidth * 0.6,
+                          fit: BoxFit.cover,
+                          errorBuilder: (context, error, stackTrace) {
+                            return Container(
+                              color: Colors.grey.shade200,
+                              height: constraints.maxWidth * 0.6,
+                              child: Icon(Icons.image_not_supported),
+                            );
+                          },
+                        )
+                      : Container(
+                          color: Colors.grey.shade200,
+                          height: constraints.maxWidth * 0.6,
+                          width: double.infinity,
+                          child: Icon(Icons.image, size: 40),
+                        ),
                 ),
 
                 // Text and Price
@@ -52,7 +62,7 @@ class ProductCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        product.name,
+                        product.productName,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -60,17 +70,17 @@ class ProductCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                     
+
                       // const SizedBox(height: 4),
                       Text(
-                        product.appDesc,
+                        product.productDescription,
                         style: const TextStyle(fontSize: 12),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       // const SizedBox(height: 8),
                       Text(
-                        '₹${product.price.toStringAsFixed(2)}',
+                        '₹${product.productPrice}',
                         style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.w600,

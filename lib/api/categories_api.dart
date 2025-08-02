@@ -1,7 +1,5 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
-
 import '../src/constants/strings.dart';
 import '../models/categories_model.dart';
 
@@ -17,6 +15,7 @@ class CategoriesApiServices {
         final categoryList = jsonList
             .map((json) => CategoryModel.fromJson(json))
             .toList();
+        print(response.body);
         return categoryList;
       } else {
         throw Exception(

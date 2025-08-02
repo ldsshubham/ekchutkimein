@@ -23,4 +23,27 @@ class OtpApiServices {
       throw Exception('Error sending OTP: $e');
     }
   }
+
+  static Future<String> verifyOtp(String number, String otp) async {
+    final uri = Uri.parse('${AppString.baseUrl}/verify-otp');
+
+    try {
+      final response = await http.post(
+        uri,
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"phone": number, "otp": otp}),
+      );
+      print(response.body);
+      final Map<String, dynamic> res = jsonDecode(response.body);
+      if (response.statusCode == 200 && res['status'] == "success") {
+        return res['data']['accessToken'];
+      } else {
+        final errorMessge = res['message'] ?? 'Unknown Error';
+        throw Exception(errorMessge);
+      }
+    } catch (err) {
+      print(err.toString());
+      throw Exception("Error verifying otp: $err");
+    }
+  }
 }

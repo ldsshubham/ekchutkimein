@@ -20,10 +20,11 @@ class CategoryScreen extends StatelessWidget {
             // Left Category List
             LeftContainer(),
             Expanded(
-              child: Container(
-                height: double.infinity,
+              child: Padding(
                 padding: EdgeInsets.all(8),
-                child: FeaturedProductList(),
+                child: FeaturedProductList(
+                  physics: AlwaysScrollableScrollPhysics(),
+                ),
               ),
             ),
           ],

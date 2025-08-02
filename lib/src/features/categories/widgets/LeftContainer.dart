@@ -18,19 +18,26 @@ class LeftContainer extends StatelessWidget {
       flex: 0,
       child: Container(
         decoration: BoxDecoration(
-          border: Border(
-            right: BorderSide(color: AppColors.primaryColor, width: 1.5),
-          ),
+          color: AppColors.white,
+          boxShadow: [
+            BoxShadow(
+              color: AppColors.gray.withAlpha(50),
+              offset: Offset.zero,
+              blurRadius: 1,
+              spreadRadius: .1,
+            ),
+          ],
         ),
-        width: 100,
-        child: ListView.separated(
+        width: 80,
+        child: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 8),
-          separatorBuilder: (context, index) => const Divider(height: 4),
+
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];
-            return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 8),
+            return Container(
+              height: 96,
+              padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
               child: Column(
                 children: [
                   ClipRRect(
@@ -41,23 +48,37 @@ class LeftContainer extends StatelessWidget {
                       decoration: BoxDecoration(
                         color: Color(0xFF000000 + Random().nextInt(0xFFFFFF)),
                       ),
-                      child: Center(
-                        child: Text(
-                          style: AppTextStyles.heading1.copyWith(
-                            color: AppColors.white,
-                          ),
-                          category.cName.isNotEmpty
-                              ? category.cName[0].toUpperCase()
-                              : '?',
-                        ),
+                      child: Image.network(
+                        '${category.cImg}',
+                        fit: BoxFit.cover,
+                        errorBuilder: (context, error, StackTrace) {
+                          return Center(
+                            child: Text(
+                              style: AppTextStyles.heading1.copyWith(
+                                color: AppColors.white,
+                              ),
+                              category.cName.isNotEmpty
+                                  ? category.cName[0].toUpperCase()
+                                  : '?',
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),
                   const SizedBox(height: 4),
-                  Text(
-                    category.cName,
-                    textAlign: TextAlign.center,
-                    style: const TextStyle(fontSize: 12),
+                  Expanded(
+                    child: Text(
+                      category.cName,
+                      softWrap: true,
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        height: 1.2, // line height
+                      ),
+                    ),
                   ),
                 ],
               ),

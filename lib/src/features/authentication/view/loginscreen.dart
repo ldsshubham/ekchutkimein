@@ -39,12 +39,7 @@ class LoginScreen extends StatelessWidget {
                     controller.requestOTP();
                   } else {
                     // Later you can implement: controller.verifyOTP()
-                    Get.snackbar(
-                      "Info",
-                      "OTP Verification not yet implemented.",
-                      backgroundColor: Colors.orange,
-                      colorText: Colors.white,
-                    );
+                    controller.verifyOtp(controller.otpController.text);
                   }
                 },
                 child: Obx(() {
@@ -57,17 +52,26 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
 
-            const SizedBox(height: 10),
-
             // Optional: Skip button
-            SizedBox(
-              width: double.infinity,
-              child: TextButton(
-                onPressed: () {
-                  Get.toNamed(AppRoutes.home);
-                },
-                child: const Text('Skip'),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                TextButton(
+                  onPressed: () {
+                    controller.requestOTP();
+                  },
+                  child: const Text(
+                    'Resend OTP',
+                    style: TextStyle(color: Colors.blue),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    Get.offNamed(AppRoutes.home);
+                  },
+                  child: const Text('Skip'),
+                ),
+              ],
             ),
           ],
         ),
