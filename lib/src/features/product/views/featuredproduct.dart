@@ -1,4 +1,4 @@
-import 'package:constructo_user/src/features/home/controller/productcontroller.dart';
+import 'package:constructo_user/src/features/product/controller/productcontroller.dart';
 import 'package:constructo_user/src/features/product/views/productcard.dart';
 import 'package:constructo_user/src/features/product/views/productpage.dart';
 import 'package:flutter/material.dart';
@@ -18,15 +18,17 @@ class FeaturedProductList extends StatelessWidget {
       if (controller.isLoading.value) {
         // Show shimmer placeholders while loading
         return GridView.builder(
-          shrinkWrap: false,
+          shrinkWrap: true,
+          padding: EdgeInsets.all(0),
           physics: physics,
+          primary: false,
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisSpacing: 8,
             crossAxisSpacing: 8,
             childAspectRatio: .7,
           ),
-          itemCount: 6,
+          itemCount: 10,
           itemBuilder: (context, index) {
             return Shimmer.fromColors(
               baseColor: Colors.grey.shade300,
@@ -42,23 +44,37 @@ class FeaturedProductList extends StatelessWidget {
         );
       } else {
         // Actual data
-        return GridView.builder(
-          shrinkWrap: true,
-          physics: physics,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            mainAxisSpacing: 8,
-            crossAxisSpacing: 8,
-            childAspectRatio: .7,
+        return Align(
+          alignment: Alignment.topLeft,
+          child: GridView.builder(
+            padding: EdgeInsets.zero,
+            primary: false,
+            shrinkWrap: true,
+            physics: physics,
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+
+              crossAxisSpacing: 8,
+              childAspectRatio: .7,
+            ),
+            itemCount: controller.productsList.length,
+            itemBuilder: (context, index) {
+              // final product = controller.productsList[index];
+              // return ProductCard(
+              //   product: product,
+              //   widget: ProductPage(product: product),
+              // );
+              if (index < controller.productsList.length) {
+                final product = controller.productsList[index];
+                return ProductCard(
+                  product: product,
+                  widget: ProductPage(product: product),
+                );
+              } else {
+                return const SizedBox(); // invisible filler
+              }
+            },
           ),
-          itemCount: controller.productsList.length,
-          itemBuilder: (context, index) {
-            final product = controller.productsList[index];
-            return ProductCard(
-              product: product,
-              widget: ProductPage(product: product),
-            );
-          },
         );
       }
     });

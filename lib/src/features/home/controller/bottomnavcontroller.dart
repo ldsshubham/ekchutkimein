@@ -9,7 +9,7 @@ class Bottomnavcontroller extends GetxController {
   var currentIndex = 0.obs;
 
   final pages = [
-    HomePage(),        // ✅ real content page
+    HomePage(), // ✅ real content page
     CategoryScreen(),
     CartScreen(),
     FarmerScreen(),

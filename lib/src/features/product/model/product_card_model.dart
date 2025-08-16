@@ -1,11 +1,13 @@
 class ProductsModel {
   final int productId;
   final int categoryId;
+  final int vendorId;
   final String productName;
   final String? productImg;
   final String productDescription;
   final String productPrice;
   ProductsModel({
+    required this.vendorId,
     required this.productId,
     required this.categoryId,
     required this.productName,
@@ -16,6 +18,7 @@ class ProductsModel {
   factory ProductsModel.fromJson(Map<String, dynamic> json) {
     return ProductsModel(
       productId: json['id'],
+      vendorId: json['vendor_id'],
       categoryId: json['category_id'],
       productName: json['name'],
       productImg: json['img'],

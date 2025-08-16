@@ -36,10 +36,12 @@ class LoginScreen extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   if (controller.currentStep.value == 0) {
-                    controller.requestOTP();
+                    controller.requestOtp();
                   } else {
                     // Later you can implement: controller.verifyOTP()
-                    controller.verifyOtp(controller.otpController.text);
+                    controller.verifyOtpAndSaveOtp(
+                      controller.otpController.text,
+                    );
                   }
                 },
                 child: Obx(() {
@@ -58,7 +60,7 @@ class LoginScreen extends StatelessWidget {
               children: [
                 TextButton(
                   onPressed: () {
-                    controller.requestOTP();
+                    controller.requestOtp();
                   },
                   child: const Text(
                     'Resend OTP',

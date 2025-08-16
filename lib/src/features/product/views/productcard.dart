@@ -1,19 +1,19 @@
-import 'package:constructo_user/models/products_models.dart';
+import 'package:constructo_user/src/features/product/model/product_card_model.dart';
+import 'package:constructo_user/src/features/product/views/productpage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../constants/app_colors.dart';
 
 class ProductCard extends StatelessWidget {
-  const ProductCard({super.key, required this.product, required this.widget});
-
   final ProductsModel product;
   final Widget widget;
+  ProductCard({super.key, required this.product, required this.widget});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => widget);
+        Get.to(ProductPage(product: product));
       },
       child: LayoutBuilder(
         builder: (context, constraints) {

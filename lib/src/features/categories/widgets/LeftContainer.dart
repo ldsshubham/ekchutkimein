@@ -31,7 +31,6 @@ class LeftContainer extends StatelessWidget {
         width: 80,
         child: ListView.builder(
           padding: const EdgeInsets.symmetric(vertical: 8),
-
           itemCount: categories.length,
           itemBuilder: (context, index) {
             final category = categories[index];

@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:iconsax/iconsax.dart';
 
 class AiGeneratorBox extends StatelessWidget {
-  const AiGeneratorBox({
-    super.key,
-  });
+  const AiGeneratorBox({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,21 +30,18 @@ class AiGeneratorBox extends StatelessWidget {
           SizedBox(height: 6),
           Text(
             'Let our AI help you plan the materials',
-            textAlign:TextAlign.center,
+            textAlign: TextAlign.center,
             style: AppTextStyles.bodyText,
           ),
           SizedBox(height: 6),
           Padding(
-            padding: const EdgeInsets.symmetric(
-              vertical: 0,
-              horizontal: 16,
-            ),
+            padding: const EdgeInsets.symmetric(vertical: 0, horizontal: 16),
             child: ElevatedButton(
               onPressed: () {},
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Iconsax.star1, color:Colors.amber,),
+                  Icon(Iconsax.star1, color: Colors.amber),
                   Text('AI Project Planner'),
                 ],
               ),

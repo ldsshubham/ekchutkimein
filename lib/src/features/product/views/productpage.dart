@@ -1,4 +1,5 @@
-import 'package:constructo_user/models/products_models.dart';
+import 'package:constructo_user/src/features/product/controller/productcontroller.dart';
+import 'package:constructo_user/src/features/product/model/product_card_model.dart';
 import 'package:constructo_user/src/constants/app_colors.dart';
 import 'package:constructo_user/src/constants/app_text_styles.dart';
 import 'package:flutter/material.dart';
@@ -6,12 +7,13 @@ import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductPage extends StatelessWidget {
+  final ProductController controller = Get.put(ProductController());
   final ProductsModel product;
-  const ProductPage({super.key, required this.product});
+  ProductPage({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {
-    var count = 0.obs;
+    controller.fetchProductById(product.productId);
     return Scaffold(
       appBar: AppBar(
         leading: IconButton(
@@ -74,9 +76,11 @@ class ProductPage extends StatelessWidget {
                         children: [
                           Text('In Stock: ', style: AppTextStyles.bodyText),
                           Text(
-                            product.categoryId.toString(),
+                            product.productId > 0 ? "Yes" : "No",
                             style: AppTextStyles.bodyText.copyWith(
-                              color: AppColors.warning,
+                              color: product.productId > 10
+                                  ? AppColors.green
+                                  : AppColors.error,
                             ),
                           ),
                         ],
@@ -89,9 +93,7 @@ class ProductPage extends StatelessWidget {
                               color: AppColors.error,
                             ),
                             child: IconButton(
-                              onPressed: () {
-                                if (count > 0) count--;
-                              },
+                              onPressed: () {},
                               icon: Icon(Iconsax.minus, color: AppColors.white),
                             ),
                           ),
@@ -100,10 +102,7 @@ class ProductPage extends StatelessWidget {
                             width: 32,
                             alignment: Alignment.center,
                             child: Obx(
-                              () => Text(
-                                '${count.value}',
-                                style: AppTextStyles.bodyText,
-                              ),
+                              () => Text('0', style: AppTextStyles.bodyText),
                             ),
                           ),
                           SizedBox(width: 8),
@@ -114,7 +113,17 @@ class ProductPage extends StatelessWidget {
                             ),
                             child: IconButton(
                               onPressed: () {
-                                count++;
+                                // if (count < product.productId) {
+                                //   count++;
+                                // } else {
+                                //   Get.snackbar(
+                                //     'Error',
+                                //     'Cannot add more than available stock',
+                                //     backgroundColor: AppColors.warning,
+                                //     colorText: AppColors.white,
+                                //     snackPosition: SnackPosition.TOP,
+                                //   );
+                                // }
                               },
                               icon: Icon(Iconsax.add, color: AppColors.white),
                             ),

@@ -1,5 +1,5 @@
-import 'package:constructo_user/api/categories_api.dart';
-import 'package:constructo_user/models/categories_model.dart';
+import 'package:constructo_user/src/features/categories/api/categories_api.dart';
+import 'package:constructo_user/src/features/categories/model/categories_model.dart';
 import 'package:get/get.dart';
 
 class CategoriesController extends GetxController {
@@ -16,7 +16,10 @@ class CategoriesController extends GetxController {
     try {
       isLoading.value = true;
       final result = await CategoriesApiServices.fetchCategories();
-      categories.value = result;
+
+      categories.assignAll(
+        result,
+      ); // Use assignAll to update the observable list
       print(result);
     } catch (e) {
       print(e.toString());

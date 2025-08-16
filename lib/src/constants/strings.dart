@@ -1,5 +1,5 @@
 class AppString {
-  static const String baseUrl = 'http://jsmglobe.com:5000/api';
+  static const String baseUrl = 'http://jsmglobe.com:5000/';
   static const appName = "EK CHUTKI MEIN";
   static const images = "assets/images/";
   static const icons = 'assets/icons/';

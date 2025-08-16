@@ -31,9 +31,7 @@ class HomePage extends StatelessWidget {
                   CategoryList(scrollDirection: Axis.horizontal),
                   // Featured product list
                   SizedBox(height: 16),
-
                   Text('Featured Product', style: AppTextStyles.heading2),
-
                   SizedBox(height: 16),
                   FeaturedProductList(physics: NeverScrollableScrollPhysics()),
                 ],

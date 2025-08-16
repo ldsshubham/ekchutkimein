@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class OtpApiServices {
   static Future<String> requestOTP(String mobileNumber) async {
-    final uri = Uri.parse("${AppString.baseUrl}/request-otp");
+    final uri = Uri.parse("${AppString.baseUrl}auth/request-otp");
     try {
       final response = await http.post(
         uri,
@@ -25,7 +25,7 @@ class OtpApiServices {
   }
 
   static Future<String> verifyOtp(String number, String otp) async {
-    final uri = Uri.parse('${AppString.baseUrl}/verify-otp');
+    final uri = Uri.parse('${AppString.baseUrl}auth/verify-otp');
 
     try {
       final response = await http.post(
@@ -36,6 +36,7 @@ class OtpApiServices {
       print(response.body);
       final Map<String, dynamic> res = jsonDecode(response.body);
       if (response.statusCode == 200 && res['status'] == "success") {
+        print("This is access Token ${res['data']['accessToken']}");
         return res['data']['accessToken'];
       } else {
         final errorMessge = res['message'] ?? 'Unknown Error';

@@ -19,9 +19,10 @@ class CategoryScreen extends StatelessWidget {
           children: [
             // Left Category List
             LeftContainer(),
+            // Right category list
             Expanded(
               child: Padding(
-                padding: EdgeInsets.all(8),
+                padding: const EdgeInsets.all(8.0),
                 child: FeaturedProductList(
                   physics: AlwaysScrollableScrollPhysics(),
                 ),

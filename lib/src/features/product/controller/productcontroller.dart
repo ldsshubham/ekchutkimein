@@ -1,0 +1,44 @@
+import 'package:constructo_user/src/features/product/api/products_api.dart';
+import 'package:constructo_user/src/features/product/model/product_card_model.dart';
+import 'package:get/get.dart';
+
+class ProductController extends GetxController {
+  var productsList = <ProductsModel>[].obs;
+  var isLoading = true.obs;
+
+  @override
+  void onInit() {
+    super.onInit();
+    fetchProducts();
+  }
+
+  void fetchProducts() async {
+    try {
+      isLoading.value = true;
+      final result = await ProductsApiServices.fetchProducts();
+      productsList.value = result;
+      print(result);
+    } catch (e) {
+      print(e.toString());
+      Get.snackbar('Error', e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  void fetchProductById(int id) async {
+    try {
+      isLoading.value = true;
+      final result = await ProductsApiServices.fetchProductById(id);
+      productsList.value = [
+        // result,
+      ]; // Assuming you want to show a single product
+      print(result);
+    } catch (e) {
+      print(e.toString());
+      Get.snackbar('Error', e.toString());
+    } finally {
+      isLoading.value = false;
+    }
+  }
+}
