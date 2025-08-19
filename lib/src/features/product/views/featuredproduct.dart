@@ -66,10 +66,7 @@ class FeaturedProductList extends StatelessWidget {
               // );
               if (index < controller.productsList.length) {
                 final product = controller.productsList[index];
-                return ProductCard(
-                  product: product,
-                  widget: ProductPage(product: product),
-                );
+                return ProductCard(product: product, widget: ProductPage());
               } else {
                 return const SizedBox(); // invisible filler
               }

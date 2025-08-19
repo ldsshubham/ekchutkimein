@@ -7,9 +7,9 @@ import 'package:constructo_user/src/features/onboarding/views/onboardingscreen.d
 import 'package:constructo_user/src/features/profile/views/profilescreen.dart';
 import 'package:constructo_user/src/features/splash_screen/binding/splash_binding.dart';
 import 'package:constructo_user/src/features/splash_screen/views/splashscreen.dart';
-import 'package:get/get.dart';
 import '../features/farmers/views/farmerscreen.dart';
 import '../features/home/views/homescreen.dart';
+import 'package:get/get.dart';
 
 class AppRoutes {
   static const splash = "/";

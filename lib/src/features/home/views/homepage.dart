@@ -1,3 +1,4 @@
+import 'package:constructo_user/src/features/nearby/views/nearby_shops.dart';
 import 'package:flutter/material.dart';
 
 import '../../../constants/app_text_styles.dart';
@@ -29,8 +30,11 @@ class HomePage extends StatelessWidget {
                   SizedBox(height: 16),
                   // Horizontal ListView with fixed height
                   CategoryList(scrollDirection: Axis.horizontal),
-                  // Featured product list
+                  Text('Nearby Shops', style: AppTextStyles.heading2),
                   SizedBox(height: 16),
+                  // Horizontal ListView with fixed height
+                  NearbyShopsList(scrollDirection: Axis.horizontal),
+                  // Featured product list
                   Text('Featured Product', style: AppTextStyles.heading2),
                   SizedBox(height: 16),
                   FeaturedProductList(physics: NeverScrollableScrollPhysics()),

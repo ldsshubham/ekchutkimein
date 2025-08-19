@@ -28,6 +28,10 @@ class HomeScreen extends StatelessWidget {
               label: 'Category',
             ),
             BottomNavigationBarItem(
+              icon: Icon(Iconsax.location),
+              label: 'Nearby',
+            ),
+            BottomNavigationBarItem(
               icon: Icon(Iconsax.shopping_cart),
               label: 'Cart',
             ),

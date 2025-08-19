@@ -1,158 +1,114 @@
-import 'package:constructo_user/src/features/product/controller/productcontroller.dart';
-import 'package:constructo_user/src/features/product/model/product_card_model.dart';
 import 'package:constructo_user/src/constants/app_colors.dart';
-import 'package:constructo_user/src/constants/app_text_styles.dart';
+import 'package:constructo_user/src/features/order/views/order_summary.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
 
 class ProductPage extends StatelessWidget {
-  final ProductController controller = Get.put(ProductController());
-  final ProductsModel product;
-  ProductPage({super.key, required this.product});
+  const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    controller.fetchProductById(product.productId);
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Get.back();
-          },
-          icon: Icon(Iconsax.arrow_left),
-        ),
-      ),
-      body: SafeArea(
-        child: Container(
-          padding: EdgeInsets.fromLTRB(24, 32, 24, 32),
-          child: Builder(
-            builder: (context) {
-              return Column(
+      appBar: AppBar(),
+      body: Column(
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+              // height: MediaQuery.of(context).size.height,
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  ClipRRect(
-                    borderRadius: BorderRadiusGeometry.circular(12),
-                    child:
-                        product.productImg != null &&
-                            product.productImg!.isNotEmpty
-                        ? Image.network(
-                            product.productImg!,
-                            width: double.infinity,
-                            height: 200,
-                            fit: BoxFit.cover,
-                            errorBuilder: (context, error, stackTrace) {
-                              return Container(
-                                color: Colors.grey.shade200,
-                                height: 200,
-                                child: Icon(Icons.image_not_supported),
-                              );
-                            },
-                          )
-                        : Container(
-                            color: Colors.grey.shade200,
-                            height: 200,
-                            width: double.infinity,
-                            child: Icon(Icons.image, size: 40),
-                          ),
-                  ),
-                  SizedBox(height: 16),
-                  Text(
-                    product.productName,
-                    style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                  ),
-                  SizedBox(height: 8),
-                  Text(
-                    'Price: ₹${product.productPrice}',
-                    style: TextStyle(color: Colors.green, fontSize: 20),
-                  ),
-                  SizedBox(height: 8),
-                  Text(product.productDescription),
-                  SizedBox(height: 16),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Row(
-                        children: [
-                          Text('In Stock: ', style: AppTextStyles.bodyText),
-                          Text(
-                            product.productId > 0 ? "Yes" : "No",
-                            style: AppTextStyles.bodyText.copyWith(
-                              color: product.productId > 10
-                                  ? AppColors.green
-                                  : AppColors.error,
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: AppColors.error,
-                            ),
-                            child: IconButton(
-                              onPressed: () {},
-                              icon: Icon(Iconsax.minus, color: AppColors.white),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Container(
-                            width: 32,
-                            alignment: Alignment.center,
-                            child: Obx(
-                              () => Text('0', style: AppTextStyles.bodyText),
-                            ),
-                          ),
-                          SizedBox(width: 8),
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: AppColors.success,
-                            ),
-                            child: IconButton(
-                              onPressed: () {
-                                // if (count < product.productId) {
-                                //   count++;
-                                // } else {
-                                //   Get.snackbar(
-                                //     'Error',
-                                //     'Cannot add more than available stock',
-                                //     backgroundColor: AppColors.warning,
-                                //     colorText: AppColors.white,
-                                //     snackPosition: SnackPosition.TOP,
-                                //   );
-                                // }
-                              },
-                              icon: Icon(Iconsax.add, color: AppColors.white),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  Spacer(),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Add to cart'),
+                  // Product Image
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Colors.grey.shade200,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    height: 200,
+                    child: Center(
+                      child: Icon(Icons.shopping_bag_outlined, size: 150),
                     ),
                   ),
-                  SizedBox(height: 10),
-                  SizedBox(
-                    width: double.infinity,
-                    child: OutlinedButton(
-                      onPressed: () {},
-                      child: Text('Buy Now'),
+                  SizedBox(height: 16.0),
+                  // Product Name
+                  Text(
+                    'Product Name lorem ipsum dolor sit amet, consectetur adipiscing elit.',
+                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.w200),
+                  ),
+                  SizedBox(height: 8.0),
+                  // Product Name
+                  Text(
+                    '₹999',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w100,
+                      color: AppColors.error,
+                      decoration: TextDecoration.lineThrough,
+                      decorationColor: AppColors.error,
+                      decorationThickness: 2,
                     ),
+                  ),
+                  Text(
+                    '₹999',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w400,
+                      color: AppColors.green,
+                    ),
+                  ),
+                  SizedBox(height: 16.0),
+                  // Product Description
+                  Text(
+                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
+                    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
+                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                   ),
                 ],
-              );
-            },
+              ),
+            ),
           ),
-        ),
+          Spacer(),
+          // Add to Cart Button
+          Padding(
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Expanded(
+                  child: OutlinedButton(
+                    onPressed: () {},
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(Iconsax.shopping_cart5),
+                        Text('Add to Cart'),
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(width: 8.0),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Get.to(() => OrderSummary());
+                    },
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [Icon(Iconsax.shopping_bag), Text('Buy Now')],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(height: 16.0),
+        ],
       ),
     );
   }
