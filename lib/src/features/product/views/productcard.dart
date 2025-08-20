@@ -13,7 +13,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(ProductPage());
+        Get.to(() => ProductPage());
       },
       child: LayoutBuilder(
         builder: (context, constraints) {

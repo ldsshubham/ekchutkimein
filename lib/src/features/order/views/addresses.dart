@@ -1,6 +1,7 @@
 import 'package:constructo_user/src/constants/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:iconsax/iconsax.dart';
 
 class AddressScreen extends StatelessWidget {
   var sameAdd = true.obs;
@@ -15,6 +16,48 @@ class AddressScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Container(
+                padding: EdgeInsets.all(8),
+                width: double.infinity,
+
+                decoration: BoxDecoration(
+                  color: AppColors.white,
+                  borderRadius: BorderRadius.circular(12),
+                  boxShadow: [
+                    BoxShadow(
+                      color: AppColors.gray.withAlpha(50),
+                      offset: Offset.zero,
+                      blurRadius: 2,
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Saved Address', style: TextStyle(fontSize: 20)),
+                    Flexible(
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: 4,
+                        itemBuilder: (context, index) {
+                          return ListTile(
+                            title: Text("Shubham Mishra"),
+                            subtitle: Text(
+                              'Bhidiura, Gyanpur, Bhadohi, 221304',
+                            ),
+                            trailing: IconButton(
+                              onPressed: () {},
+                              icon: Icon(Iconsax.more),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 10),
               AddressForm(addType: 'Delivery Address'),
               SizedBox(height: 10),
               Obx(

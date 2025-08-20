@@ -1,4 +1,4 @@
-import 'package:constructo_user/src/features/nearby/views/nearby.dart';
+import 'package:constructo_user/src/features/nearby/views/nearbyscreen.dart';
 import 'package:get/get.dart';
 import '../../categories/views/categoryscreen.dart';
 import '../../cart/views/cartscreen.dart';
@@ -12,7 +12,7 @@ class Bottomnavcontroller extends GetxController {
   final pages = [
     HomePage(), // ✅ real content page
     CategoryScreen(),
-    NearbyScreen(),
+    Nearbyscreen(),
     CartScreen(),
     FarmerScreen(),
     ProfileScreen(),
