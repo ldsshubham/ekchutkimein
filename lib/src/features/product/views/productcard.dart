@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:constructo_user/src/constants/strings.dart';
 import 'package:constructo_user/src/features/product/model/product_card_model.dart';
 import 'package:constructo_user/src/features/product/views/productpage.dart';
 import 'package:flutter/material.dart';
@@ -6,94 +9,80 @@ import '../../../constants/app_colors.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductsModel product;
-  final Widget widget;
-  ProductCard({super.key, required this.product, required this.widget});
-
+  // final Widget widget;
+  ProductCard({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
-        Get.to(() => ProductPage());
+        print(product.productId);
+        Get.to(() => ProductPage(ProductId: product.productId));
       },
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return Container(
+      child: SizedBox(
+        height: 180,
+        width: 160,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(12),
+          child: Container(
             decoration: BoxDecoration(
-              color: AppColors.white,
-              borderRadius: BorderRadius.circular(12),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/images.jpeg'),
+                fit: BoxFit.cover,
+              ),
+              borderRadius: BorderRadius.circular(16),
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.gray.withAlpha(50),
+                  spreadRadius: 1,
+                  blurRadius: 4,
+                ),
+              ],
             ),
             child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                // Image
                 ClipRRect(
-                  borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(12),
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(12),
+                    bottomRight: Radius.circular(12),
                   ),
-                  child:
-                      product.productImg != null &&
-                          product.productImg!.isNotEmpty
-                      ? Image.network(
-                          product.productImg!,
-                          width: double.infinity,
-                          height: constraints.maxWidth * 0.6,
-                          fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) {
-                            return Container(
-                              color: Colors.grey.shade200,
-                              height: constraints.maxWidth * 0.6,
-                              child: Icon(Icons.image_not_supported),
-                            );
-                          },
-                        )
-                      : Container(
-                          color: Colors.grey.shade200,
-                          height: constraints.maxWidth * 0.6,
-                          width: double.infinity,
-                          child: Icon(Icons.image, size: 40),
-                        ),
-                ),
-
-                // Text and Price
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        product.productName,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 14,
-                        ),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+                    child: Container(
+                      width: double.infinity,
+                      color: AppColors.primaryColor.withAlpha(100),
+                      padding: EdgeInsets.all(12),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            product.productName ?? "No Name",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            product.productCategory ?? "No Category",
+                            style: TextStyle(
+                              color: AppColors.error,
+                              fontSize: 12,
+                            ),
+                          ),
+                          Text(
+                            "${AppString.ruppee} ${product.productPrice}",
+                            style: TextStyle(color: Colors.white, fontSize: 18),
+                          ),
+                        ],
                       ),
-
-                      // const SizedBox(height: 4),
-                      Text(
-                        product.productDescription,
-                        style: const TextStyle(fontSize: 12),
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      // const SizedBox(height: 8),
-                      Text(
-                        '₹${product.productPrice}',
-                        style: const TextStyle(
-                          color: Colors.green,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 13,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               ],
             ),
-          );
-        },
+          ),
+        ),
       ),
     );
   }

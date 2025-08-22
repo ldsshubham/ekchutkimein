@@ -1,115 +1,116 @@
 import 'package:constructo_user/src/constants/app_colors.dart';
-import 'package:constructo_user/src/features/order/views/order_summary.dart';
+import 'package:constructo_user/src/constants/strings.dart';
+import 'package:constructo_user/src/features/product/controller/product_details_controller.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
+  final int ProductId;
+  const ProductPage({super.key, required this.ProductId});
 
   @override
   Widget build(BuildContext context) {
+    final controller = Get.put(ProductDetailsController(ProductId));
     return Scaffold(
       appBar: AppBar(),
-      body: Column(
-        children: [
-          SingleChildScrollView(
-            child: Container(
-              padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-              // height: MediaQuery.of(context).size.height,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
+      body: Obx(() {
+        if (controller.isLoading.value) {
+          return LoadingAnimationWidget.waveDots(
+            color: AppColors.primaryColor,
+            size: 24,
+          );
+        }
+        final product = controller.productDetails.value;
+        if (product == null) {
+          return Center(child: Text('No data found'));
+        }
+        return Padding(
+          padding: EdgeInsetsGeometry.symmetric(horizontal: 16, vertical: 8),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(
+                child: ListView(
+                  children: [
+                    Container(
+                      width: double.infinity,
+                      height: MediaQuery.of(context).size.height * .25,
+                      decoration: BoxDecoration(
+                        color: AppColors.gray,
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      child: Icon(Iconsax.gallery),
+                    ),
+                    SizedBox(height: 8),
+                    Text(
+                      product.productName,
+                      style: TextStyle(
+                        color: AppColors.primaryColor,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      product.categoryName,
+                      style: TextStyle(color: AppColors.green, fontSize: 16),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      "${AppString.ruppee} ${product.price}",
+                      style: TextStyle(
+                        color: AppColors.error,
+                        fontSize: 12,
+                        decoration: TextDecoration.lineThrough,
+                        decorationColor: AppColors.error,
+                      ),
+                    ),
+                    Text(
+                      "${AppString.ruppee} ${product.finalPrice}",
+                      style: TextStyle(
+                        color: AppColors.green,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      "In Stock: ${product.stock}",
+                      style: TextStyle(
+                        color: product.stock > 0
+                            ? AppColors.green
+                            : AppColors.error,
+                      ),
+                    ),
+                    SizedBox(height: 4),
+                    Text(
+                      product.productDesc,
+                      style: TextStyle(color: AppColors.gray),
+                    ),
+                  ],
+                ),
+              ),
+              Row(
                 children: [
-                  // Product Image
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey.shade200,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    height: 200,
-                    child: Center(
-                      child: Icon(Icons.shopping_bag_outlined, size: 150),
+                  Expanded(
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      child: Text('Button'),
                     ),
                   ),
-                  SizedBox(height: 16.0),
-                  // Product Name
-                  Text(
-                    'Product Name lorem ipsum dolor sit amet, consectetur adipiscing elit.',
-                    style: TextStyle(fontSize: 28, fontWeight: FontWeight.w200),
-                  ),
-                  SizedBox(height: 8.0),
-                  // Product Name
-                  Text(
-                    '₹999',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w100,
-                      color: AppColors.error,
-                      decoration: TextDecoration.lineThrough,
-                      decorationColor: AppColors.error,
-                      decorationThickness: 2,
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      child: Text('Button'),
                     ),
-                  ),
-                  Text(
-                    '₹999',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w400,
-                      color: AppColors.green,
-                    ),
-                  ),
-                  SizedBox(height: 16.0),
-                  // Product Description
-                  Text(
-                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. '
-                    'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
-                    'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w300),
                   ),
                 ],
               ),
-            ),
+            ],
           ),
-          Spacer(),
-          // Add to Cart Button
-          Padding(
-            padding: const EdgeInsets.symmetric(
-              horizontal: 16.0,
-              vertical: 8.0,
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Expanded(
-                  child: OutlinedButton(
-                    onPressed: () {},
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(Iconsax.shopping_cart5),
-                        Text('Add to Cart'),
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(width: 8.0),
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Get.to(() => OrderSummary());
-                    },
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [Icon(Iconsax.shopping_bag), Text('Buy Now')],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 16.0),
-        ],
-      ),
+        );
+      }),
     );
   }
 }

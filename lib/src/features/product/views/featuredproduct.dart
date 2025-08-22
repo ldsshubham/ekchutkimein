@@ -1,6 +1,5 @@
 import 'package:constructo_user/src/features/product/controller/productcontroller.dart';
 import 'package:constructo_user/src/features/product/views/productcard.dart';
-import 'package:constructo_user/src/features/product/views/productpage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
@@ -44,34 +43,25 @@ class FeaturedProductList extends StatelessWidget {
         );
       } else {
         // Actual data
-        return Align(
-          alignment: Alignment.topLeft,
-          child: GridView.builder(
-            padding: EdgeInsets.zero,
-            primary: false,
-            shrinkWrap: true,
-            physics: physics,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-
-              crossAxisSpacing: 8,
-              childAspectRatio: .7,
-            ),
-            itemCount: controller.productsList.length,
-            itemBuilder: (context, index) {
-              // final product = controller.productsList[index];
-              // return ProductCard(
-              //   product: product,
-              //   widget: ProductPage(product: product),
-              // );
-              if (index < controller.productsList.length) {
-                final product = controller.productsList[index];
-                return ProductCard(product: product, widget: ProductPage());
-              } else {
-                return const SizedBox(); // invisible filler
-              }
-            },
+        return GridView.builder(
+          padding: EdgeInsets.zero,
+          primary: false,
+          shrinkWrap: true,
+          physics: physics,
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: 2,
+            mainAxisSpacing: 8,
+            crossAxisSpacing: 8,
           ),
+          itemCount: controller.productsList.length,
+          itemBuilder: (context, index) {
+            if (index < controller.productsList.length) {
+              final product = controller.productsList[index];
+              return ProductCard(product: product);
+            } else {
+              return const SizedBox(); // invisible filler
+            }
+          },
         );
       }
     });

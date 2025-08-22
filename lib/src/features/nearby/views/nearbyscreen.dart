@@ -14,7 +14,7 @@ class Nearbyscreen extends StatelessWidget {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
             maxCrossAxisExtent: 200, // <-- size of each grid item
-            childAspectRatio: 0.8, // <-- adjust height/width ratio
+            // childAspectRatio: 0.8, // <-- adjust height/width ratio
             crossAxisSpacing: 10,
             mainAxisSpacing: 10,
           ),

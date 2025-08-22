@@ -66,7 +66,7 @@ class CartScreen extends StatelessWidget {
                       // final product = controller.productsList[index];
                       return GestureDetector(
                         onTap: () {
-                          Get.to(() => ProductPage());
+                          Get.to(() => ProductPage(ProductId: item.productId));
                         },
                         child: Container(
                           decoration: BoxDecoration(

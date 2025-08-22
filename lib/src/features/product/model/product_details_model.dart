@@ -1,16 +1,17 @@
 class ProductDetailsModel {
   final int productId;
-  final int categoryId;
+  final String categoryName;
   final String productName;
   final String productDesc;
   final String price;
   final String discount;
   final int stock;
   final String finalPrice;
+
   ProductDetailsModel({
     required this.finalPrice,
     required this.productId,
-    required this.categoryId,
+    required this.categoryName,
     required this.productName,
     required this.productDesc,
     required this.price,
@@ -20,12 +21,12 @@ class ProductDetailsModel {
   factory ProductDetailsModel.fromJson(Map<String, dynamic> json) {
     return ProductDetailsModel(
       productId: json['id'],
-      categoryId: json['category_id'],
+      categoryName: json['category_name'],
       productName: json['name'],
       productDesc: json['description'],
       price: json['price'],
       discount: json['discount'],
-      stock: json['stock'],
+      stock: json['in_stock'],
       finalPrice:
           json['final_price'] ??
           json['price'], // Assuming final_price is optional

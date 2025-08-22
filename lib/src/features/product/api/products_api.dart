@@ -6,7 +6,7 @@ import '../model/product_card_model.dart';
 
 class ProductsApiServices {
   static Future<List<ProductsModel>> fetchProducts() async {
-    final url = '${AppString.baseUrl}api/products';
+    final url = '${AppString.baseUrl}products';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 201 || response.statusCode == 200) {
@@ -23,12 +23,12 @@ class ProductsApiServices {
         );
       }
     } catch (e) {
-      throw Exception('Something went wrong in fetching product details. $e ');
+      throw Exception('Something went wrong in fetching product list. $e ');
     }
   }
 
   static Future<ProductDetailsModel> fetchProductById(int productId) async {
-    final url = '${AppString.baseUrl}api/products/$productId';
+    final url = '${AppString.baseUrl}products/$productId';
     try {
       final response = await http.get(Uri.parse(url));
       if (response.statusCode == 200) {
