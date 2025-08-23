@@ -10,7 +10,7 @@ import '../controllers/cartcontroller.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
 class CartScreen extends StatelessWidget {
-  final CartController cartController = Get.put(CartController());
+  final CartController cartController = Get.put(CartController()..fetchCard());
   final ProductController controller = Get.put(ProductController());
 
   CartScreen({super.key});
@@ -113,7 +113,12 @@ class CartScreen extends StatelessWidget {
                                               ),
                                         ),
                                         IconButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            cartController.updateCart(
+                                              item.productId,
+                                              0,
+                                            );
+                                          },
                                           icon: Icon(
                                             size: 24,
                                             Iconsax.trash,
@@ -147,7 +152,10 @@ class CartScreen extends StatelessWidget {
                                           children: [
                                             IconButton(
                                               onPressed: () {
-                                                // handle decrease qty
+                                                cartController.updateCart(
+                                                  item.productId,
+                                                  item.quantity - 1,
+                                                );
                                               },
                                               icon: Icon(
                                                 Iconsax.minus,
@@ -163,6 +171,10 @@ class CartScreen extends StatelessWidget {
                                             ),
                                             IconButton(
                                               onPressed: () {
+                                                cartController.updateCart(
+                                                  item.productId,
+                                                  item.quantity + 1,
+                                                );
                                                 // handle increase qty
                                               },
                                               icon: Icon(

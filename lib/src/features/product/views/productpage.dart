@@ -1,5 +1,7 @@
 import 'package:constructo_user/src/constants/app_colors.dart';
 import 'package:constructo_user/src/constants/strings.dart';
+import 'package:constructo_user/src/features/cart/controllers/cartcontroller.dart';
+import 'package:constructo_user/src/features/order/views/addresses.dart';
 import 'package:constructo_user/src/features/product/controller/product_details_controller.dart';
 
 import 'package:flutter/material.dart';
@@ -13,14 +15,17 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartController = Get.put(CartController());
     final controller = Get.put(ProductDetailsController(ProductId));
     return Scaffold(
       appBar: AppBar(),
       body: Obx(() {
         if (controller.isLoading.value) {
-          return LoadingAnimationWidget.waveDots(
-            color: AppColors.primaryColor,
-            size: 24,
+          return Center(
+            child: LoadingAnimationWidget.waveDots(
+              color: AppColors.primaryColor,
+              size: 24,
+            ),
           );
         }
         final product = controller.productDetails.value;
@@ -95,14 +100,19 @@ class ProductPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: OutlinedButton(
-                      onPressed: () {},
-                      child: Text('Button'),
+                      onPressed: () {
+                        cartController.addToCart(product.productId, 1);
+                      },
+                      child: Text('Add To Cart'),
                     ),
                   ),
+                  SizedBox(width: 4),
                   Expanded(
                     child: ElevatedButton(
-                      onPressed: () {},
-                      child: Text('Button'),
+                      onPressed: () {
+                        Get.to(() => AddressScreen());
+                      },
+                      child: Text('Buy Now'),
                     ),
                   ),
                 ],

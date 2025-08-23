@@ -1,26 +1,30 @@
-
-
-import 'package:constructo_user/src/features/home/widgets/appcategory.dart';
+import 'package:constructo_user/src/features/farmers/views/servicepage.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import '../../constants/app_colors.dart';
-
+import 'package:iconsax/iconsax.dart';
+import '../../../constants/app_colors.dart';
 
 class FarmingCard extends StatelessWidget {
   const FarmingCard({
     super.key,
-    required this.product, required this.widget
+    required this.servicename,
+    required this.servicedesc,
+    required this.serviceprice,
+    required this.serviceunit,
+    required this.serviceId,
   });
 
-  final FarmingServices product;
-  final Widget widget;
+  final String servicename;
+  final String servicedesc;
+  final String serviceprice;
+  final String serviceunit;
+  final int serviceId;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        Get.to(() => widget);
+        Get.to(() => Servicepage(serviceId: serviceId));
       },
       child: LayoutBuilder(
         builder: (context, constraints) {
@@ -28,7 +32,6 @@ class FarmingCard extends StatelessWidget {
             decoration: BoxDecoration(
               color: AppColors.white,
               borderRadius: BorderRadius.circular(12),
-             
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,11 +41,13 @@ class FarmingCard extends StatelessWidget {
                   borderRadius: const BorderRadius.vertical(
                     top: Radius.circular(12),
                   ),
-                  child: Image.asset(
-                    product.imgPath,
+                  child: Container(
                     width: double.infinity,
-                    height: constraints.maxWidth * 0.6, // Responsive height
-                    fit: BoxFit.cover,
+                    height: constraints.maxWidth * 0.6,
+                    decoration: BoxDecoration(
+                      color: AppColors.gray.withAlpha(50),
+                    ),
+                    child: Icon(Iconsax.gallery),
                   ),
                 ),
 
@@ -54,7 +59,7 @@ class FarmingCard extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        product.name,
+                        servicename,
                         style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 14,
@@ -62,17 +67,17 @@ class FarmingCard extends StatelessWidget {
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
-                     
+
                       // const SizedBox(height: 4),
                       Text(
-                        product.appDesc,
+                        servicedesc,
                         style: const TextStyle(fontSize: 12),
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                       ),
                       // const SizedBox(height: 8),
                       Text(
-                        '₹${product.price.toStringAsFixed(2)}/hr',
+                        '₹${serviceprice}/${serviceunit}',
                         style: const TextStyle(
                           color: Colors.green,
                           fontWeight: FontWeight.w600,

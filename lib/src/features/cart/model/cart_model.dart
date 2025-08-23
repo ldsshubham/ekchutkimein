@@ -15,16 +15,18 @@ class CartModel {
   });
 
   factory CartModel.fromJson(Map<String, dynamic> json) {
-    final List<dynamic> itemsJson = json['items'] as List<dynamic>;
-    final List<CartItem> itemsList = itemsJson
-        .map((item) => CartItem.fromJson(item))
-        .toList();
+    final itemsJson = json['items'] as List<dynamic>?;
+    final List<CartItem> itemsList = itemsJson != null
+        ? itemsJson.map((item) => CartItem.fromJson(item)).toList()
+        : <CartItem>[];
 
     return CartModel(
       cartId: json['cart_id'] ?? 0,
       userId: json['user_id'] ?? 0,
       items: itemsList,
-      totalCartprice: CartTotalModel.fromJson(json['total']),
+      totalCartprice: json['total'] != null
+          ? CartTotalModel.fromJson(json['total'])
+          : CartTotalModel(totalPrice: 0, discount: 0, finalAmount: 0),
     );
   }
 }

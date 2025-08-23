@@ -1,76 +1,95 @@
-import 'package:constructo_user/src/features/farmers/farmingCard.dart';
-import 'package:constructo_user/src/features/farmers/views/servicepage.dart';
+import 'package:constructo_user/src/features/farmers/widgets/farmingCard.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import '../../../constants/app_colors.dart';
 import '../../home/widgets/appcategory.dart';
 import '../controllers/filtercontroller.dart';
+import '../controllers/service_controller.dart';
 
 class FarmerScreen extends StatelessWidget {
   FarmerScreen({super.key});
-
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  final ServiceController serviceController = Get.put(ServiceController());
   final FilterController filterController = Get.put(FilterController());
 
   @override
   Widget build(BuildContext context) {
+    serviceController.fetchServiceList();
     return Scaffold(
       key: _scaffoldKey,
       drawer: Drawer(child: FilterDrawer(filterController: filterController)),
-
       appBar: AppBar(
         centerTitle: true,
         title: const Text('Agricultural Services'),
         automaticallyImplyLeading: false,
       ),
 
-      body: Padding(
-        padding: const EdgeInsets.all(8),
-        child: Column(
-          children: [
-            Row(
+      body: Obx(() {
+        if (serviceController.isloading.value) {
+          return Center(
+            child: LoadingAnimationWidget.waveDots(
+              color: AppColors.primaryColor,
+              size: 24,
+            ),
+          );
+        } else if (serviceController.services.value == null) {
+          return Center(child: Text('No Services'));
+        } else {
+          final serviceList = serviceController.services.value!.data;
+          return Padding(
+            padding: const EdgeInsets.all(8),
+            child: Column(
               children: [
+                // Row(
+                //   children: [
+                //     Expanded(
+                //       child: TextField(
+                //         decoration: InputDecoration(
+                //           prefixIcon: const Icon(Iconsax.search_normal),
+                //           hintText: 'Search services...',
+                //           border: OutlineInputBorder(
+                //             borderRadius: BorderRadius.circular(8),
+                //           ),
+                //         ),
+                //       ),
+                //     ),
+                //     IconButton(
+                //       onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                //       icon: const Icon(Iconsax.filter_search),
+                //     ),
+                //   ],
+                // ),
+                // const SizedBox(height: 20),
                 Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: const Icon(Iconsax.search_normal),
-                      hintText: 'Search services...',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                    ),
+                  child: GridView.builder(
+                    itemCount: serviceList.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          childAspectRatio: .75,
+                          crossAxisSpacing: 8,
+                          mainAxisSpacing: 8,
+                        ),
+                    itemBuilder: (context, index) {
+                      final services = serviceList[index];
+
+                      return FarmingCard(
+                        servicename: services.servicename,
+                        servicedesc: services.servicedesc,
+                        serviceprice: services.serviceprice,
+                        serviceunit: services.unit,
+                        serviceId: services.id,
+                      );
+                    },
                   ),
-                ),
-                IconButton(
-                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
-                  icon: const Icon(Iconsax.filter_search),
                 ),
               ],
             ),
-            const SizedBox(height: 20),
-
-            Expanded(
-              child: GridView.builder(
-                  itemCount: farmingServices.length,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: .75,
-                    crossAxisSpacing: 8,
-                    mainAxisSpacing: 8,
-                  ),
-                  itemBuilder: (context, index) {
-                    final farmingSer = farmingServices[index];
-                    return FarmingCard(
-                      product: farmingSer,
-                      widget: Servicepage(service: farmingSer),
-                    );
-                  },
-                ),
-              
-            ),
-          ],
-        ),
-      ),
+          );
+        }
+      }),
     );
   }
 
